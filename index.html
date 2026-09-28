@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZAKVID HR — Enterprise Workforce Intelligence</title>
+  <title>ZAKVID HR — Enterprise Workforce System</title>
   <meta name="description" content="ZAKVID HR Platform featuring real-time form validation, multi-page dynamic navigation, and modern executive design.">
   
   <!-- Google Fonts: Plus Jakarta Sans + Inter + JetBrains Mono -->
@@ -21,16 +21,18 @@
 </head>
 <body>
 
-  <!-- Dynamic Animated Background Layer -->
+  <!-- Ambient Motion Background -->
   <div class="ambient-bg-layer" aria-hidden="true">
     <div class="glow-orb orb-primary"></div>
     <div class="glow-orb orb-secondary"></div>
   </div>
 
+  <!-- Global Container: max-w-7xl, mx-auto, px-4 sm:px-6 lg:px-8, top padding -->
   <div class="app-container">
     
-    <!-- Top Sticky Black & Orange Navigation Bar -->
+    <!-- 2. NAVBAR (3-Zone Flex Layout: Logo left | Nav tabs center | Actions right, h-16) -->
     <header class="app-header">
+      <!-- Zone 1: Logo Left -->
       <div class="brand" id="brandHomeTrigger" style="cursor: pointer;">
         <div class="brand-logo">
           <span>Z</span>
@@ -41,7 +43,7 @@
         </div>
       </div>
 
-      <!-- Main Navigation Tabs -->
+      <!-- Zone 2: Nav Tabs Center (equal px-4 py-2, rounded-full, orange active pill, whitespace-nowrap) -->
       <nav class="main-nav" id="mainNav">
         <button class="nav-tab active" data-page="view">
           <i class="fa-solid fa-users-viewfinder"></i>
@@ -61,15 +63,16 @@
         </button>
       </nav>
 
-      <!-- Global Controls & Search -->
+      <!-- Zone 3: Actions Right (Search, Export, Theme, Mobile Hamburger) -->
       <div class="header-controls">
+        <!-- 3. SEARCH BAR (position relative, pl-10 pr-20, absolute icon & Ctrl-K kbd) -->
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="searchInput" placeholder="Search workforce, role..." autocomplete="off">
-          <kbd class="shortcut-key">Ctrl + K</kbd>
+          <input type="text" id="searchInput" placeholder="Search employees..." autocomplete="off">
+          <kbd class="shortcut-key">Ctrl K</kbd>
         </div>
 
-        <!-- Export Dropdown -->
+        <!-- 4. EXPORT BUTTON (ONE button + styled dropdown menu items) -->
         <div class="dropdown">
           <button class="btn btn-secondary" id="exportBtn" title="Export Employee Data">
             <i class="fa-solid fa-download"></i>
@@ -94,7 +97,7 @@
       </div>
     </header>
 
-    <!-- PAGE 1: WORKFORCE DIRECTORY & OVERVIEW -->
+    <!-- PAGE 1: WORKFORCE DIRECTORY -->
     <main id="pageView" class="page-content active-page">
       
       <!-- Hero Banner Section -->
@@ -102,7 +105,7 @@
         <div class="hero-content">
           <span class="hero-badge"><i class="fa-solid fa-sparkles"></i> Enterprise Intelligence 2026</span>
           <h1 class="hero-title">Empowering Modern Teams with <span class="gradient-text">Precision & Elegance</span></h1>
-          <p class="hero-subtext">Manage workforce distribution, real-time analytics, payroll outflows, and employee lifecycles with our high-contrast enterprise platform.</p>
+          <p class="hero-subtext">Manage workforce distribution, real-time analytics, payroll outflows, and employee lifecycles with our executive platform.</p>
           <div class="hero-actions">
             <button class="btn btn-primary" onclick="document.getElementById('deptFilterContainer').scrollIntoView({behavior: 'smooth'})">
               <i class="fa-solid fa-users"></i> Explore Directory
@@ -114,32 +117,14 @@
         </div>
       </section>
 
-      <!-- Bento Grid Highlights -->
-      <section class="bento-grid">
-        <div class="bento-card bento-span-2">
-          <div class="bento-icon"><i class="fa-solid fa-shield-halved"></i></div>
-          <div>
-            <h3>Enterprise Workforce Security</h3>
-            <p>Role-based access control, MySQL parameterized queries, and instant real-time audit verification across all regional hubs.</p>
-          </div>
-        </div>
-        <div class="bento-card bento-card-pink">
-          <div class="bento-icon"><i class="fa-solid fa-chart-pie"></i></div>
-          <div>
-            <h3>Real-Time Sync</h3>
-            <p>Automated headcount telemetry with active staff ratios & payroll budget tracking.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- KPI Summary Cards -->
+      <!-- 5. STAT CARDS (grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6, p-6, rounded-2xl) -->
       <section class="dashboard-grid">
         <div class="kpi-card">
           <div class="kpi-info">
             <span class="kpi-label">Total Headcount</span>
             <h2 class="kpi-value" id="valTotalEmployees">0</h2>
           </div>
-          <span class="kpi-meta" id="badgeWorkforceCount">Registered Staff</span>
+          <span class="kpi-meta" id="badgeWorkforceCount">Registered Personnel</span>
         </div>
 
         <div class="kpi-card">
@@ -167,9 +152,9 @@
         </div>
       </section>
 
-      <!-- Filter & Search Controls Toolbar -->
-      <section class="toolbar-section">
-        <!-- Department Filter Pills -->
+      <!-- 6. FILTER BAR (ONE Card p-4 sm:p-6 with Row 1 & Row 2 + Slim Results Bar below) -->
+      <section class="filter-card">
+        <!-- Row 1: Department Pills (horizontally scrollable, no scrollbar, same height) -->
         <div class="filter-pills" id="deptFilterContainer">
           <button class="pill-btn active" data-dept="All">All Depts</button>
           <button class="pill-btn" data-dept="Engineering">Engineering</button>
@@ -180,8 +165,8 @@
           <button class="pill-btn" data-dept="HR">HR</button>
         </div>
 
+        <!-- Row 2: Secondary Filters + View Toggles (ml-auto) -->
         <div class="secondary-filters">
-          <!-- Work Mode Select -->
           <div class="filter-group">
             <label for="workModeFilter">Mode:</label>
             <select id="workModeFilter" class="select-input">
@@ -192,7 +177,6 @@
             </select>
           </div>
 
-          <!-- Status Select -->
           <div class="filter-group">
             <label for="statusFilter">Status:</label>
             <select id="statusFilter" class="select-input">
@@ -203,7 +187,6 @@
             </select>
           </div>
 
-          <!-- Sort Select -->
           <div class="filter-group">
             <label for="sortBySelect">Sort:</label>
             <select id="sortBySelect" class="select-input">
@@ -216,7 +199,7 @@
             </select>
           </div>
 
-          <!-- View Mode Toggle -->
+          <!-- View Toggle Group (pushed to far right via ml-auto) -->
           <div class="view-toggle-group">
             <button class="btn-toggle active" id="viewGridBtn" title="Grid View">
               <i class="fa-solid fa-grip"></i>
@@ -228,29 +211,38 @@
         </div>
       </section>
 
-      <!-- Active Tags Summary -->
+      <!-- Slim Results Bar INSIDE below filter card -->
       <div class="results-bar">
-        <span>Showing <strong id="resultsCount">0</strong> workforce records</span>
-        <div class="active-tags" id="activeTagsContainer"></div>
+        <span>Showing <strong id="visibleCount">0</strong> of <strong id="totalCount">0</strong> records</span>
+        <div class="active-tags" id="activeFiltersContainer"></div>
+        <button id="clearFiltersBtn" class="clear-btn-orange hidden">Clear Filters</button>
       </div>
 
-      <!-- Employee Grid Container -->
-      <section id="employeeGridContainer" class="employee-grid-container"></section>
+      <!-- 7. EMPLOYEE CARDS GRID (grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6) -->
+      <section id="employeeGrid" class="employee-grid-container"></section>
 
-      <!-- Employee Table Container (Hidden by default) -->
-      <section id="employeeTableContainer" class="table-container hidden-page">
+      <!-- Empty State -->
+      <div id="emptyState" class="architectural-form hidden" style="text-align: center; padding: 3rem;">
+        <i class="fa-solid fa-folder-open" style="font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 1rem;"></i>
+        <h3>No matching employee records found</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Try resetting filters or modifying your search query.</p>
+        <button id="emptyResetBtn" class="btn btn-primary" style="margin: 0 auto;">Reset Filters</button>
+      </div>
+
+      <!-- Employee Table View (Hidden by default) -->
+      <section id="tableView" class="table-container hidden">
         <div class="table-scroll-wrapper">
           <table class="employee-table">
             <thead>
               <tr>
-                <th class="th-sortable" data-sort="name">Employee</th>
-                <th class="th-sortable" data-sort="id">ID</th>
+                <th>Employee</th>
+                <th>ID</th>
                 <th>Department</th>
                 <th>Designation</th>
                 <th>Location</th>
                 <th>Work Mode</th>
                 <th>Status</th>
-                <th class="th-sortable text-right" data-sort="salary">Salary (INR)</th>
+                <th class="text-right">Salary (INR)</th>
                 <th class="text-right">Actions</th>
               </tr>
             </thead>
@@ -329,7 +321,7 @@
           <!-- Interactive Charts Section -->
           <div class="charts-grid">
             <div class="chart-card">
-              <div class="chart-card-header">
+              <div class="chart-card-header" style="display:flex; justify-content:space-between; align-items:center;">
                 <h3>Workforce Growth Trajectory</h3>
                 <span class="hero-badge" style="margin:0;"><i class="fa-solid fa-calendar"></i> 2026 Monthly</span>
               </div>
@@ -338,7 +330,7 @@
               </div>
             </div>
             <div class="chart-card">
-              <div class="chart-card-header">
+              <div class="chart-card-header" style="display:flex; justify-content:space-between; align-items:center;">
                 <h3>Department Breakdown</h3>
                 <span class="hero-badge" style="margin:0;"><i class="fa-solid fa-chart-pie"></i> Distribution</span>
               </div>
@@ -350,11 +342,10 @@
 
           <!-- Activity & Goals Grid -->
           <div class="activity-goals-grid">
-            <!-- Recent Activity List -->
             <div class="activity-card">
               <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Recent HR Activity</h3>
               <div class="activity-item">
-                <div class="activity-user">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
                   <div class="user-avatar-img" style="width:36px; height:36px; font-size: 0.8rem;">AS</div>
                   <div>
                     <strong style="font-size: 0.88rem;">Aarav Sharma</strong>
@@ -364,7 +355,7 @@
                 <span class="status-pill status-active">Active</span>
               </div>
               <div class="activity-item">
-                <div class="activity-user">
+                <div style="display:flex; align-items:center; gap:0.75rem;">
                   <div class="user-avatar-img" style="width:36px; height:36px; font-size: 0.8rem; background: var(--grad-pink-orange);">AP</div>
                   <div>
                     <strong style="font-size: 0.88rem;">Ananya Patel</strong>
@@ -373,19 +364,8 @@
                 </div>
                 <span class="status-pill status-on-leave">On Leave</span>
               </div>
-              <div class="activity-item">
-                <div class="activity-user">
-                  <div class="user-avatar-img" style="width:36px; height:36px; font-size: 0.8rem;">RV</div>
-                  <div>
-                    <strong style="font-size: 0.88rem;">Rohan Verma</strong>
-                    <p style="font-size: 0.78rem; color: var(--text-muted);">Completed Annual Appraisal</p>
-                  </div>
-                </div>
-                <span class="status-pill status-active">Active</span>
-              </div>
             </div>
 
-            <!-- HR Goals & Progress -->
             <div class="activity-card">
               <h3 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem;">Quarterly Objectives</h3>
               <div style="margin-bottom: 1.25rem;">
@@ -397,7 +377,7 @@
                   <div class="progress-fill" style="width: 85%;"></div>
                 </div>
               </div>
-              <div style="margin-bottom: 1.25rem;">
+              <div>
                 <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700;">
                   <span>Performance Appraisals</span>
                   <span>92%</span>
@@ -406,17 +386,7 @@
                   <div class="progress-fill" style="width: 92%;"></div>
                 </div>
               </div>
-              <div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 700;">
-                  <span>Diversity & Inclusion Index</span>
-                  <span>78%</span>
-                </div>
-                <div class="progress-bar-box">
-                  <div class="progress-fill" style="width: 78%;"></div>
-                </div>
-              </div>
             </div>
-
           </div>
 
         </div>
@@ -426,10 +396,10 @@
 
     <!-- PAGE 3: ADD EMPLOYEE FORM -->
     <main id="pageAdd" class="page-content hidden-page">
-      <div class="page-header-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom: 1rem; border-bottom: 1px solid var(--border-subtle);">
         <div>
-          <h2>Register New Employee</h2>
-          <p class="section-subtext">Add a new personnel record into the MySQL database.</p>
+          <h2 style="font-size: 1.6rem; font-weight: 800;">Register New Employee</h2>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Add a new personnel record into the MySQL database.</p>
         </div>
         <button class="btn btn-secondary" id="navBackToViewBtn">
           <i class="fa-solid fa-arrow-left"></i> Back to Directory
@@ -528,8 +498,8 @@
           </div>
         </div>
 
-        <div class="form-actions" style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem;">
-          <button type="button" class="btn btn-secondary" id="resetFormBtn">Reset Form</button>
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" id="pageResetFormBtn">Reset Form</button>
           <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i> Register Employee</button>
         </div>
       </form>
@@ -537,111 +507,143 @@
 
     <!-- PAGE 4: CONTACT HR PAGE -->
     <main id="pageContact" class="page-content hidden-page">
-      <div class="page-header-box">
-        <div>
-          <h2>Contact HR Desk</h2>
-          <p class="section-subtext">Direct assistance for workforce inquiries and payroll support.</p>
-        </div>
+      <div style="padding-bottom: 1rem; border-bottom: 1px solid var(--border-subtle);">
+        <h2 style="font-size: 1.6rem; font-weight: 800;">Contact HR Desk</h2>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">Direct assistance for workforce inquiries and payroll support.</p>
       </div>
-      <div class="architectural-form" style="max-width: 680px; margin: 0 auto; width: 100%;">
+      <form id="contactForm" class="architectural-form" style="max-width: 680px; margin: 0 auto; width: 100%;">
         <div class="form-group">
-          <label>Your Full Name</label>
-          <input type="text" placeholder="Enter name">
+          <label for="contactName">Your Full Name</label>
+          <input type="text" id="contactName" name="contactName" placeholder="Enter name">
         </div>
         <div class="form-group">
-          <label>Your Email Address</label>
-          <input type="email" placeholder="name@zakvid.in">
+          <label for="contactEmail">Your Email Address</label>
+          <input type="email" id="contactEmail" name="contactEmail" placeholder="name@zakvid.in">
         </div>
         <div class="form-group">
-          <label>Inquiry Message</label>
-          <textarea rows="4" placeholder="How can our HR team assist you today?"></textarea>
+          <label for="contactSubject">Inquiry Subject</label>
+          <select id="contactSubject" name="contactSubject">
+            <option value="">Select category</option>
+            <option value="Payroll">Payroll & Salary</option>
+            <option value="Leave">Leave Request</option>
+            <option value="General">General Inquiry</option>
+          </select>
         </div>
-        <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Inquiry</button>
-      </div>
+        <div class="form-group">
+          <label for="contactMessage">Inquiry Message</label>
+          <textarea id="contactMessage" name="contactMessage" rows="4" placeholder="How can our HR team assist you today?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Inquiry</button>
+      </form>
     </main>
 
   </div>
 
-  <!-- SLIDE-OVER DRAWER (Edit Employee) -->
-  <div class="drawer" id="editDrawer" aria-hidden="true">
-    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <!-- MODAL EDIT EMPLOYEE -->
+  <dialog class="modal" id="employeeModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-container">
+      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Edit Employee Record</h3>
+      <form id="employeeForm" class="architectural-form" style="padding:0; background:none; border:none; box-shadow:none;">
+        <input type="hidden" id="editEmployeeId">
+        <div class="form-group">
+          <label for="empId">Employee ID</label>
+          <input type="text" id="empId" readonly>
+        </div>
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Work Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="text" id="phone">
+        </div>
+        <div class="form-group">
+          <label for="department">Department</label>
+          <select id="department">
+            <option value="Engineering">Engineering</option>
+            <option value="Design">Design</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Finance">Finance</option>
+            <option value="Sales">Sales</option>
+            <option value="HR">HR</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="designation">Designation</label>
+          <input type="text" id="designation" required>
+        </div>
+        <div class="form-group">
+          <label for="salary">Annual Salary (INR)</label>
+          <input type="number" id="salary" required>
+        </div>
+        <div class="form-group">
+          <label for="joiningDate">Joining Date</label>
+          <input type="date" id="joiningDate" required>
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status">
+            <option value="Active">Active</option>
+            <option value="On Leave">On Leave</option>
+            <option value="Inactive">Inactive</option>
+          </select>
+        </div>
+        <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem;">
+          <button type="button" class="btn btn-secondary" id="cancelFormBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="closeModalBtn">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- PROFILE DRAWER -->
+  <dialog class="drawer" id="profileDrawer">
+    <div class="drawer-backdrop"></div>
     <div class="drawer-content">
       <div class="drawer-header">
-        <div>
-          <h3 style="font-size: 1.2rem; font-weight: 800;">Edit Employee Record</h3>
-          <span id="drawerEmpIdBadge" class="emp-id-tag">ZAK-0000</span>
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <div id="drawerAvatar" class="emp-avatar"><span id="drawerInitials">AS</span></div>
+          <div>
+            <h3 id="drawerName" style="font-size: 1.15rem; font-weight: 800;">Aarav Sharma</h3>
+            <p id="drawerDesignation" style="font-size: 0.83rem; color: var(--text-muted);">Lead Frontend Architect</p>
+          </div>
         </div>
         <button class="btn btn-icon btn-secondary" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="drawer-body">
-        <form id="editEmployeeForm" class="architectural-form" style="padding: 0; background: none; border: none; box-shadow: none;">
-          <input type="hidden" id="editEmpId" name="id">
-          
-          <div class="form-group">
-            <label for="editFullName">Full Name</label>
-            <input type="text" id="editFullName" name="fullName" required>
-          </div>
-          <div class="form-group">
-            <label for="editEmail">Work Email</label>
-            <input type="email" id="editEmail" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="editPhone">Contact Phone</label>
-            <input type="text" id="editPhone" name="phone">
-          </div>
-          <div class="form-group">
-            <label for="editDepartment">Department</label>
-            <select id="editDepartment" name="department">
-              <option value="Engineering">Engineering</option>
-              <option value="Design">Design</option>
-              <option value="Marketing">Marketing</option>
-              <option value="Finance">Finance</option>
-              <option value="Sales">Sales</option>
-              <option value="HR">HR</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="editDesignation">Designation</label>
-            <input type="text" id="editDesignation" name="designation" required>
-          </div>
-          <div class="form-group">
-            <label for="editSalary">Annual Salary (INR)</label>
-            <input type="number" id="editSalary" name="salary" required>
-          </div>
-          <div class="form-group">
-            <label for="editStatus">Status</label>
-            <select id="editStatus" name="status">
-              <option value="Active">Active</option>
-              <option value="On Leave">On Leave</option>
-              <option value="Inactive">Inactive</option>
-            </select>
-          </div>
-          <div style="display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end;">
-            <button type="button" class="btn btn-secondary" id="cancelDrawerBtn">Cancel</button>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
-          </div>
-        </form>
+        <div class="card-meta-list" style="border:none;">
+          <div class="meta-item"><span>Employee ID:</span><strong id="drawerEmpId">ZAK-1001</strong></div>
+          <div class="meta-item"><span>Department:</span><strong id="drawerDeptBadge">Engineering</strong></div>
+          <div class="meta-item"><span>Workplace Mode:</span><strong id="drawerWorkModeBadge">Remote</strong></div>
+          <div class="meta-item"><span>Status:</span><strong id="drawerStatusBadge">Active</strong></div>
+          <div class="meta-item"><span>Location:</span><strong id="drawerLocation">Bengaluru</strong></div>
+          <div class="meta-item"><span>Work Email:</span><strong id="drawerEmail">aarav@zakvid.in</strong></div>
+          <div class="meta-item"><span>Phone:</span><strong id="drawerPhone">+91 98765 43210</strong></div>
+          <div class="meta-item"><span>Tenure:</span><strong id="drawerTenure">3 Years</strong></div>
+          <div class="meta-item"><span>Annual CTC:</span><strong id="drawerAnnualSalary">₹24,00,000</strong></div>
+          <div class="meta-item"><span>Tax Bracket:</span><strong id="drawerEstimatedTax">30%</strong></div>
+        </div>
+        <div style="margin-top: 1rem;">
+          <h4 style="font-size: 0.85rem; margin-bottom: 0.5rem;">Skills & Expertise</h4>
+          <div id="drawerSkillsContainer" class="card-skills"></div>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button class="btn btn-primary" id="drawerEditBtn" style="flex:1;"><i class="fa-solid fa-pen"></i> Edit Profile</button>
+          <button class="btn btn-danger" id="drawerDeleteBtn"><i class="fa-solid fa-trash"></i> Delete</button>
+        </div>
       </div>
     </div>
-  </div>
-
-  <!-- CONFIRM DELETE MODAL -->
-  <div class="modal" id="deleteModal" aria-hidden="true">
-    <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div class="modal-container">
-      <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--accent-pink-deep);">Delete Employee Confirmation</h3>
-      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">Are you sure you want to permanently delete <strong id="deleteEmpName" style="color: var(--text-black);">Employee</strong>? This action cannot be undone.</p>
-      <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-        <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
-        <button class="btn btn-danger" id="confirmDeleteBtn"><i class="fa-solid fa-trash"></i> Delete Employee</button>
-      </div>
-    </div>
-  </div>
+  </dialog>
 
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- GLOBAL FOOTER -->
+  <!-- 4. FOOTER (Black background, beige text, orange hover, 4 columns, newsletter input) -->
   <footer class="app-footer">
     <div class="footer-container">
       <div class="footer-grid">
