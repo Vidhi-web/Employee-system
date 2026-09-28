@@ -1,44 +1,19 @@
 <?php
-// API Endpoint: Get All Employees
-header('Content-Type: application/json; charset=utf-8');
+// READ: Fetch all employee records from database
+header('Content-Type: application/json');
 require_once 'db_connect.php';
 
-$query = "SELECT * FROM employees ORDER BY id ASC";
-$result = $conn->query($query);
-
-if (!$result) {
-    http_response_code(500);
-    echo json_encode([
-        "success" => false,
-        "message" => "Database Query Error: " . $conn->error
-    ]);
-    exit();
-}
-
+// Query to get all employees
+$result = $conn->query("SELECT * FROM employees ORDER BY id ASC");
 $employees = [];
 
+// Fetch each row and format values
 while ($row = $result->fetch_assoc()) {
-    // Cast salary to integer
     $row['salary'] = (int)$row['salary'];
-
-    // Convert skills to a PHP array so it becomes a JS array in JSON output
-    $skillsRaw = $row['skills'] ?? '';
-    if (!empty($skillsRaw)) {
-        // Try decoding as JSON first
-        $decoded = json_decode($skillsRaw, true);
-        if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-            $row['skills'] = $decoded;
-        } else {
-            // Otherwise, split comma-separated string
-            $row['skills'] = array_values(array_filter(array_map('trim', explode(',', $skillsRaw))));
-        }
-    } else {
-        $row['skills'] = [];
-    }
-
+    $row['skills'] = !empty($row['skills']) ? json_decode($row['skills'], true) : [];
     $employees[] = $row;
 }
 
+// Return data as JSON
 echo json_encode($employees);
-$conn->close();
 ?>
