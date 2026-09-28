@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navTabs = document.querySelectorAll('.nav-tab');
   const pages = {
     view: document.getElementById('pageView'),
+    dashboard: document.getElementById('pageDashboard'),
     add: document.getElementById('pageAdd'),
     contact: document.getElementById('pageContact')
   };
@@ -166,6 +167,64 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------------------------------------------------------------------------
   // 4. MULTI-PAGE TAB NAVIGATION
   // --------------------------------------------------------------------------
+  // Chart instances
+  let growthChartInstance = null;
+  let deptChartInstance = null;
+
+  function initDashboardCharts() {
+    if (typeof Chart === 'undefined') return;
+
+    const growthCtx = document.getElementById('growthChart');
+    if (growthCtx && !growthChartInstance) {
+      growthChartInstance = new Chart(growthCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+          datasets: [{
+            label: 'Workforce Headcount',
+            data: [42, 48, 55, 62, 70, 78, 85, 92, 104],
+            borderColor: '#F28C38',
+            backgroundColor: 'rgba(242, 140, 56, 0.15)',
+            fill: true,
+            tension: 0.4,
+            pointBackgroundColor: '#F4A6B8',
+            pointRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { grid: { color: 'rgba(0,0,0,0.05)' } },
+            x: { grid: { display: false } }
+          }
+        }
+      });
+    }
+
+    const deptCtx = document.getElementById('deptChart');
+    if (deptCtx && !deptChartInstance) {
+      deptChartInstance = new Chart(deptCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Engineering', 'Design', 'Marketing', 'Finance', 'Sales', 'HR'],
+          datasets: [{
+            data: [35, 18, 15, 12, 14, 6],
+            backgroundColor: ['#F28C38', '#F4A6B8', '#1A1A1A', '#E97A97', '#E07620', '#2B2B2B'],
+            borderWidth: 2,
+            borderColor: '#FFFFFF'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { legend: { position: 'bottom' } }
+        }
+      });
+    }
+  }
+
   function switchPage(pageName) {
     activePage = pageName;
     navTabs.forEach(tab => {
@@ -177,25 +236,60 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     Object.keys(pages).forEach(key => {
-      if (key === pageName) {
-        pages[key].classList.remove('hidden-page');
-        pages[key].classList.add('active-page');
-      } else {
-        pages[key].classList.remove('active-page');
-        pages[key].classList.add('hidden-page');
+      if (pages[key]) {
+        if (key === pageName) {
+          pages[key].classList.remove('hidden-page');
+          pages[key].classList.add('active-page');
+        } else {
+          pages[key].classList.remove('active-page');
+          pages[key].classList.add('hidden-page');
+        }
       }
     });
 
-    if (pageName === 'add') {
-      pageEmpId.value = generateNextEmployeeId();
+    if (pageName === 'add' && typeof generateNextEmployeeId === 'function') {
+      const pageEmpId = document.getElementById('pageEmpId');
+      if (pageEmpId) pageEmpId.value = generateNextEmployeeId();
+    }
+
+    if (pageName === 'dashboard') {
+      setTimeout(initDashboardCharts, 100);
     }
   }
 
   navTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       switchPage(tab.getAttribute('data-page'));
+      const mainNav = document.getElementById('mainNav');
+      if (mainNav) mainNav.classList.remove('open');
     });
   });
+
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mainNav = document.getElementById('mainNav');
+  if (mobileMenuBtn && mainNav) {
+    mobileMenuBtn.addEventListener('click', () => {
+      mainNav.classList.toggle('open');
+    });
+  }
+
+  const heroAddEmpBtn = document.getElementById('heroAddEmpBtn');
+  if (heroAddEmpBtn) {
+    heroAddEmpBtn.addEventListener('click', () => switchPage('add'));
+  }
+
+  const footerDashLink = document.getElementById('footerDashLink');
+  const footerAddLink = document.getElementById('footerAddLink');
+  const footerContactLink = document.getElementById('footerContactLink');
+  if (footerDashLink) {
+    footerDashLink.addEventListener('click', (e) => { e.preventDefault(); switchPage('dashboard'); window.scrollTo({top:0, behavior:'smooth'}); });
+  }
+  if (footerAddLink) {
+    footerAddLink.addEventListener('click', (e) => { e.preventDefault(); switchPage('add'); window.scrollTo({top:0, behavior:'smooth'}); });
+  }
+  if (footerContactLink) {
+    footerContactLink.addEventListener('click', (e) => { e.preventDefault(); switchPage('contact'); window.scrollTo({top:0, behavior:'smooth'}); });
+  }
 
   if (navBackToViewBtn) {
     navBackToViewBtn.addEventListener('click', () => switchPage('view'));
